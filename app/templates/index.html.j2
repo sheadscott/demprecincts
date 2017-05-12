@@ -1,0 +1,35 @@
+# extends 'base.html.j2'
+
+  # block content
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div id="home-map" class="container-fluid">
+    <div id="map"></div>
+  </div>
+  # include 'travis_map.html.j2'
+  <div id="title-container" class="container-fluid">
+    <h1 id="index-h1">Precint Maps for Your County&rsquo;s Democratic Party Website</h1>
+  </div>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <main role="main" class="col-md-7">
+        <p>Let your community know who their Precinct Chair is, how to contact them, or if it is vacant, how they can step in to organize their neighborhood.</p>
+        <p>We will provide, at no cost, a precinct map of your county that you can easily place on the county party website with an embed code</p>
+        <pre><code>{% filter escape %}<iframe src="https://demprecincts.org/st/county"></iframe>{% endfilter %}</code></pre>
+        <p>The precinct chair information is populated through a Google Spreadsheet that we will set up and give you permission to edit. This means that your map will always be up to date with the latest information you have.</p>
+      </main>
+      <div class="col-md-5">
+        # block contact
+        # endblock
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>&copy; 2017 demprecincts.org</p>
+    </footer>
+  </div> <!-- /container -->
+
+
+  # endblock

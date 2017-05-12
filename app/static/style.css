@@ -1,0 +1,94 @@
+/** Regular */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+p, div {
+  font-family: "San Francisco","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  /*padding-top: 50px;*/
+  padding-bottom: 20px;
+}
+
+/* GOOGLE MAPS - Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+
+div#home-map.container-fluid { height: 500px; padding-left: 0; padding-right: 0; }
+
+#title-container {
+  background-color: #00AEF3;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 30px;
+}
+
+#index-h1 {
+    padding-bottom: 20px;
+    padding-top: 4px;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000;
+}
+
+pre {
+  text-align: center;
+}
+
+h2#contact {
+  font-size: 24px;
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+:required {
+  box-shadow: 2px 2px 4px rgba(0, 174, 243, 0.5);
+}
+
+ul#position {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 -5px 5px;
+}
+
+ul#position label {
+  padding-left: 5px;
+}
+
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+/*html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}*/
+
+.gm-style .gm-style-iw, .gm-style .gm-style-iw p {
+  font-size: 14px;
+  line-height: 1.4em;
+}
+
+.gm-style .gm-style-iw p {
+  width: 300px;
+}
+
+/* END GOOGLE MAPS */

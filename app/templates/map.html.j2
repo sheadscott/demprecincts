@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ county }} County, {{ state }}</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+
+    <div id="map"></div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script>
+
+      // This is free for any Democratic Party to use
+      // All I ask is that you either let me create the Google Sheet
+      // or you share the URL of the Google Sheet with me when you create it
+      // This will let us easily aggregate Precinct Chair data by pulling the
+      // Sheets as CSV files through URLs such as
+      // https://docs.google.com/spreadsheets/d/1W4vl0dxr2fkmiLSvMA9_y4m6YlVMZ9l0EuNPGEZHqDs/pub?output=csv
+      // Shea Scott, Austin, TX - sheadscott@gmail.com
+      // Contact me with any questions or if you need help
+      // #resist #moneyoutofpolitics #takebackamerica
+
+      var spreadSheetURL = '{{ sheet }}';
+      var pctChairs;
+
+      function initSheet() {
+
+        Tabletop.init( { key: spreadSheetURL,
+                         callback: function(data, tabletop) {
+                             pctChairs = data;
+                             console.log(pctChairs);
+                             loadMapScript();
+                         },
+                         // debug: true,
+                         simpleSheet: true } )
+      }
+
+      initSheet();
+
+
+      var map;
+      var infoWindow;
+
+      function loadMapScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap';
+        document.body.appendChild(script);
+      }
+
+      function initMap() {
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 30.6333, lng: -97.6780},
+          zoom: 11
+        });
+
+        var vacantPrecincts = [];
+        var vacantPrecinctObjs = pctChairs.filter(function(obj){
+          var re = /.*vacant.*/i;
+          return obj.Name.match(re);
+        });
+
+        vacantPrecinctObjs.forEach(function(obj){
+          vacantPrecincts.push(obj.Precinct);
+        });
+
+        // console.log(vacantPrecincts);
+
+
+        var noRegistered = [];
+        var noRegPrecinctObjs = pctChairs.filter(function(obj){
+          var re = /.*no.*voters.*/i;
+          return obj.Name.match(re);
+        });
+
+        noRegPrecinctObjs.forEach(function(obj){
+          noRegistered.push(obj.Precinct);
+        });
+
+        // console.log(noRegistered);
+
+        map.data.loadGeoJson('{{ url_for( 'static', filename='maps/') }}{{ state }}/{{ county }}.geojson');
+
+
+        map.data.setStyle({
+          fillColor: '#0332fb',
+          fillOpacity: 0.3,
+          strokeColor: '#0332fb',
+          strokeWeight: 0.5
+        });
+
+        map.data.setStyle(function(feature) {
+
+          var pct = feature.getProperty('PREC').replace(/\b0+/g, '');
+          console.log(pct);
+
+          feature.setProperty('name', pct);
+          // console.log(feature.getProperty('name'));
+          // var pct = pctNumber;
+          var color = vacantPrecincts.indexOf(pct) > -1 ? '#333333' : '#0332fb';
+          var opacity = noRegistered.indexOf(pct) > -1 ? 0 : 0.3;
+          return {
+            fillColor: color,
+            fillOpacity: opacity,
+            strokeColor: '#0332fb',
+            strokeWeight: 0.5,
+            strokeOpacity: 0.6
+          };
+        });
+
+        map.data.addListener('click', showWindow );
+
+        infoWindow = new google.maps.InfoWindow();
+
+
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showWindow(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        //var vertices = this.getPath();
+        var pctNumber =  event.feature.getProperty('PREC').replace(/\b0+/g, '');
+        var pctObject = pctChairs.filter(function(obj){
+          return obj.Precinct == pctNumber;
+        });
+        var chairName = pctObject[0].Name;
+        var chairEmail = pctObject[0].Email;
+
+        console.log(chairName) + "<br>";
+
+        var contentString = '<b>Precinct ' + pctNumber + '</b>';
+
+        if(chairName != "Vacant" && chairName != "No Registered Voters") {
+          contentString += "<br>" + chairName + "<br><a href='mailto:" + chairEmail + "'>" + chairEmail + "</a>";
+        } else {
+          if(chairName == "Vacant") {
+            contentString += "<p>Do you know someone that would become the Precinct Chair of an unoccupied seat?<br>Here’s where they sign up: <a href='http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf'>http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf</a></p>";
+          } else {
+            contentString += "<br>" + chairName;
+          }
+        }
+
+
+
+
+
+        map.data.revertStyle();
+        map.data.overrideStyle(event.feature, {strokeWeight: 2});
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+
+    </script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap"
+    async defer></script> -->
+  </body>
+</html>

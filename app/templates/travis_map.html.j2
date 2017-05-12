@@ -1,0 +1,143 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+<script>
+
+  var spreadSheetURL = 'https://docs.google.com/spreadsheets/d/1W4vl0dxr2fkmiLSvMA9_y4m6YlVMZ9l0EuNPGEZHqDs/pubhtml';
+  var pctChairs;
+
+  function initSheet() {
+
+    Tabletop.init( { key: spreadSheetURL,
+                     callback: function(data, tabletop) {
+                         pctChairs = data;
+                         console.log(pctChairs);
+                         loadMapScript();
+                     },
+                     // debug: true,
+                     simpleSheet: true } )
+  }
+
+  initSheet();
+
+
+  var map;
+  var infoWindow;
+
+  function loadMapScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap';
+    document.body.appendChild(script);
+  }
+
+  function initMap() {
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 30.267, lng: -97.743},
+      zoom: 11
+    });
+
+    var vacantPrecincts = [];
+    var vacantPrecinctObjs = pctChairs.filter(function(obj){
+      var re = /.*vacant.*/i;
+      return obj.Name.match(re);
+    });
+
+    vacantPrecinctObjs.forEach(function(obj){
+      vacantPrecincts.push(obj.Precinct);
+    });
+
+    // console.log(vacantPrecincts);
+
+
+    var noRegistered = [];
+    var noRegPrecinctObjs = pctChairs.filter(function(obj){
+      var re = /.*no.*voters.*/i;
+      return obj.Name.match(re);
+    });
+
+    noRegPrecinctObjs.forEach(function(obj){
+      noRegistered.push(obj.Precinct);
+    });
+
+    // console.log(noRegistered);
+    // https://rawgit.com/sheadscott/county-voting-precincts/master/tx/travis.geojson
+    // production URL: https://cdn.rawgit.com/sheadscott/county-voting-precincts/a6a4aac8/tx/travis.geojson
+    map.data.loadGeoJson('https://cdn.rawgit.com/sheadscott/county-voting-precincts/a6a4aac8/tx/travis.geojson');
+
+    var activeColor = '#00AEF3';
+    var vacantColor = '#666666';
+
+    map.data.setStyle({
+      fillColor: activeColor,
+      fillOpacity: 0.2,
+      strokeColor: activeColor,
+      strokeWeight: 0.5
+    });
+
+    map.data.setStyle(function(feature) {
+
+      var pct = feature.getProperty('PREC').replace(/\b0+/g, '');
+      // console.log(pct);
+
+      feature.setProperty('name', pct);
+      // console.log(feature.getProperty('name'));
+      // var pct = pctNumber;
+      var color = vacantPrecincts.indexOf(pct) > -1 ? vacantColor : activeColor;
+      var opacity = noRegistered.indexOf(pct) > -1 ? 0 : 0.2;
+      return {
+        fillColor: color,
+        fillOpacity: opacity,
+        strokeColor: activeColor,
+        strokeWeight: 0.5,
+        strokeOpacity: 0.6
+      };
+    });
+
+    map.data.addListener('click', showWindow );
+
+    infoWindow = new google.maps.InfoWindow();
+
+
+  }
+
+  /** @this {google.maps.Polygon} */
+  function showWindow(event) {
+    // Since this polygon has only one path, we can call getPath() to return the
+    // MVCArray of LatLngs.
+    //var vertices = this.getPath();
+    var pctNumber =  event.feature.getProperty('PREC').replace(/\b0+/g, '');
+    var pctObject = pctChairs.filter(function(obj){
+      return obj.Precinct == pctNumber;
+    });
+    var chairName = pctObject[0].Name;
+    var chairEmail = pctObject[0].Email;
+
+    console.log(chairName) + "<br>";
+
+    var contentString = '<b>Precinct ' + pctNumber + '</b>';
+
+    if(chairName != "Vacant" && chairName != "No Registered Voters") {
+      contentString += "<br>" + chairName + "<br><a href='mailto:" + chairEmail + "'>" + chairEmail + "</a>";
+    } else {
+      if(chairName == "Vacant") {
+        contentString += "<p><b>Your Precinct Needs You!</b><br><a href='http://www.traviscountydemocrats.org/get-involved/your-precinct-needs-you/'>http://www.traviscountydemocrats.org/get-involved/your-precinct-needs-you/</a></p>";
+      } else {
+        contentString += "<br>" + chairName;
+      }
+    }
+
+
+
+
+
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {strokeWeight: 2});
+
+    // Replace the info window's content and position.
+    infoWindow.setContent(contentString);
+    infoWindow.setPosition(event.latLng);
+
+    infoWindow.open(map);
+  }
+
+</script>

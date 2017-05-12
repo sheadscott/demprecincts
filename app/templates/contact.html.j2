@@ -1,0 +1,72 @@
+# extends 'index.html.j2'
+
+# block contact
+
+  <!-- ReCaptcha -->
+  <!-- <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+  <script>
+    function onSubmit(token) {
+      document.getElementById("contact").submit();
+    }
+  </script> -->
+
+  <h2 id="contact">Contact Us To Get Your Map</h2>
+  <form class="form-horizontal" action="" method="post">
+    {{ contact.hidden_tag() }}
+    <div class="form-group">
+      <label for="first_name" class="col-md-4 control-label">First Name</label>
+      <div class="col-md-8">
+        {{ contact.first_name(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="last_name" class="col-md-4 control-label">Last Name</label>
+      <div class="col-md-8">
+        {{ contact.last_name(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="email" class="col-md-4 control-label">Email</label>
+      <div class="col-md-8">
+        {{ contact.email(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="confirm_email" class="col-md-4 control-label">Confirm Email</label>
+      <div class="col-md-8">
+        {{ contact.confirm_email(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="state" class="col-md-4 control-label">State</label>
+      <div class="col-md-8">
+        {{ contact.state(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="county" class="col-md-4 control-label">County/Parish</label>
+      <div class="col-md-8">
+        {{ contact.county(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <label for="position" class="col-md-4 control-label">Position</label>
+      <div class="col-md-8">
+        {{ contact.position() }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="message" class="col-md-4 control-label">Message</label>
+      <div class="col-md-8">
+        {{ contact.message(class_="form-control") }}
+      </div>
+		</div>
+    <div class="form-group">
+      <div class="col-md-offset-4 col-md-8">
+        <button class="btn btn-primary g-recaptcha" type="submit" data-sitekey="6LdanSAUAAAAAA1U5Ffd4oqySub6X3PoYfrxVent"
+        data-callback="onSubmit">Submit</button>
+      </div>
+		</div>
+  </form>
+
+# endblock
