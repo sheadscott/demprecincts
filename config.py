@@ -11,11 +11,13 @@ SECRET_KEY = 'MQESU*tm2Wp&Ck*#$8yj&6aY'
 RECAPTCHA_PUBLIC_KEY = '6LeSmyAUAAAAAETmNUHlQsKUQev1lyLOpvDBSXEJ'
 RECAPTCHA_PRIVATE_KEY = '6LeSmyAUAAAAACoOtSXNXkHLVFZoHQ9u8KtCOygG'
 
-# mail server settings
-MAIL_SERVER = 'localhost'
-MAIL_PORT = 25
-MAIL_USERNAME = None
-MAIL_PASSWORD = None
+# email server
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = os.environ.get('sheadscott@gmail.com')
+MAIL_PASSWORD = os.environ.get('F1b0n@cci')
 
 # administrator list
 ADMINS = ['sheadscott@gmail.com']

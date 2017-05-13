@@ -13,5 +13,4 @@ class ContactForm(FlaskForm):
     county = StringField(u'County', validators=[DataRequired()], render_kw={'required':'required'})
     position = RadioField('Position', choices=[('cnty_chair','County Chair'),('pct_chair','Precinct Chair'),('prty_member','Party Member')])
     message = TextAreaField('message')
-    # recaptcha = RecaptchaField()
-    # View code: {{ contact.recaptcha }}
+    recaptcha = RecaptchaField()
