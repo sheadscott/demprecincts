@@ -16,8 +16,8 @@ MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
-MAIL_USERNAME = os.environ.get('sheadscott@gmail.com')
-MAIL_PASSWORD = os.environ.get('F1b0n@cci')
+MAIL_USERNAME = 'demprecincts@gmail.com'
+MAIL_PASSWORD = '69N$B7tyK45VC$Q*jk346%j!'
 
 # administrator list
-ADMINS = ['sheadscott@gmail.com']
+ADMINS = ['demprecincts@gmail.com']

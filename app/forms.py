@@ -11,6 +11,6 @@ class ContactForm(FlaskForm):
     confirm_email = EmailField('confirm_email', validators=[DataRequired()], render_kw={'required':'required', 'autocomplete':'email'})
     state = SelectField(u'State', validators=[DataRequired()], render_kw={'required':'required', 'autocomplete': 'region'})
     county = StringField(u'County', validators=[DataRequired()], render_kw={'required':'required'})
-    position = RadioField('Position', choices=[('cnty_chair','County Chair'),('pct_chair','Precinct Chair'),('prty_member','Party Member')])
+    position = RadioField('Position', choices=[('county_chair','County Chair'),('precinct_chair','Precinct Chair'),('other','Other')], default='other')
     message = TextAreaField('message')
     recaptcha = RecaptchaField()

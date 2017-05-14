@@ -1,8 +1,9 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
 from app import app, db
 from datetime import datetime
 from .forms import ContactForm
 from .models import User, State
+from .emails import send_contact_notification
 
 app.jinja_env.line_statement_prefix = '#'
 
@@ -10,6 +11,7 @@ app.jinja_env.line_statement_prefix = '#'
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])
 def index():
+
     contact = ContactForm()
     state_list = [(s.postal_code, s.name) for s in State.query.order_by('postal_code')]
     state_list.insert(0, ('', '-- State --'))
@@ -24,15 +26,23 @@ def index():
                     timestamp=datetime.utcnow())
 
         userEmail = User.query.filter_by(email=u.email).first()
+        msg = contact.message.data
+        send_contact_notification(u, msg)
+        flash('Thanks for your interest! We will be in contact with you at: {0}'.format(contact.email.data))
+
         if userEmail != None:
-            pass # Send an email of the message instead of creating a new userEmail
+            pass
         else:
             db.session.add(u)
             db.session.commit()
-            flash('Thanks %s! We will let you as we roll out more features' %
-                str(contact.first_name.data))
-                
-        return redirect('/index/')
+
+
+        return redirect('/')
+
+    else:
+        pass
+        # flash('Errors %s' % contact.errors)
+
     return render_template('contact.html.j2',
                             contact=contact)
 
