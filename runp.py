@@ -1,3 +1,4 @@
-#!flask/bin/python
-from app import app
-app.run(debug=False)
+from demprecincts import app
+
+if __name__ == "__main__":
+    app.run(debug=False)
