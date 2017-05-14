@@ -2,7 +2,7 @@
 
 from app import db, models
 
-f = open('../vogb/GIS/db/state-postal-codes.csv', 'r')
+f = open('./db_tools/state-postal-codes.csv', 'r')
 
 for line in f:
     state = line.rstrip().split(',')
@@ -10,5 +10,3 @@ for line in f:
     db.session.add(s)
 
 db.session.commit()
-
-models.State.query.all()
