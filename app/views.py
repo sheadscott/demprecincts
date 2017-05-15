@@ -13,7 +13,7 @@ app.jinja_env.line_statement_prefix = '#'
 def index():
 
     contact = ContactForm()
-    state_list = [(s.postal_code, s.name) for s in State.query.order_by('postal_code')]
+    state_list = [(s.postal_code, s.name.title()) for s in State.query.order_by('postal_code')]
     state_list.insert(0, ('', '-- State --'))
     contact.state.choices = state_list
     if contact.validate_on_submit():
@@ -40,8 +40,8 @@ def index():
         return redirect('/')
 
     else:
-        pass
-        # flash('Errors %s' % contact.errors)
+        # pass
+        flash('There was a technical problem submitting your request. Please email us at demprecincts@mail.com<br>Errors: {0}'.format(contact.errors))
 
     return render_template('contact.html.j2',
                             contact=contact)
