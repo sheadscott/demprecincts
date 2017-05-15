@@ -40,8 +40,8 @@ def index():
         return redirect('/')
 
     else:
-        # pass
-        flash('There was a technical problem submitting your request. Please email us at demprecincts@mail.com<br>Errors: {0}'.format(contact.errors))
+        pass
+        # flash('There was a technical problem submitting your request. Please email us at demprecincts@mail.com<br>Errors: {0}'.format(contact.errors))
 
     return render_template('contact.html.j2',
                             contact=contact)
