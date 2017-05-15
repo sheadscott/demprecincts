@@ -28,7 +28,7 @@ def index():
         userEmail = User.query.filter_by(email=u.email).first()
         msg = contact.message.data
         send_contact_notification(u, msg)
-        flash('Thanks for your interest! We will be in contact with you at: {0}'.format(contact.email.data))
+        flash('Thanks for your interest!<br>We will be in contact with you at:<br>{0}'.format(contact.email.data))
 
         if userEmail != None:
             pass
