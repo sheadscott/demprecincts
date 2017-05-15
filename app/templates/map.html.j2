@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html class='map-page'>
   <head>
     <title>{{ county }} County, {{ state }}</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
-  <body>
+  <body class='map-page'>
 
     <div id="map"></div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
     <script>
-
-      // This is free for any Democratic Party to use
-      // All I ask is that you either let me create the Google Sheet
-      // or you share the URL of the Google Sheet with me when you create it
-      // This will let us easily aggregate Precinct Chair data by pulling the
-      // Sheets as CSV files through URLs such as
-      // https://docs.google.com/spreadsheets/d/1W4vl0dxr2fkmiLSvMA9_y4m6YlVMZ9l0EuNPGEZHqDs/pub?output=csv
-      // Shea Scott, Austin, TX - sheadscott@gmail.com
-      // Contact me with any questions or if you need help
-      // #resist #moneyoutofpolitics #takebackamerica
 
       var spreadSheetURL = '{{ sheet }}';
       var pctChairs;
@@ -30,10 +20,10 @@
         Tabletop.init( { key: spreadSheetURL,
                          callback: function(data, tabletop) {
                              pctChairs = data;
-                             console.log(pctChairs);
+                             // console.log(pctChairs);
                              loadMapScript();
                          },
-                         // debug: true,
+                         debug: true,
                          simpleSheet: true } )
       }
 
@@ -53,7 +43,7 @@
       function initMap() {
 
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 30.6333, lng: -97.6780},
+          center: {lat: {{ latitude }}, lng: -{{ longitude }}},
           zoom: 11
         });
 
@@ -82,7 +72,7 @@
 
         // console.log(noRegistered);
 
-        map.data.loadGeoJson('{{ url_for( 'static', filename='maps/') }}{{ state }}/{{ county }}.geojson');
+        map.data.loadGeoJson('{{ geojson }}');
 
 
         map.data.setStyle({
@@ -95,7 +85,7 @@
         map.data.setStyle(function(feature) {
 
           var pct = feature.getProperty('PREC').replace(/\b0+/g, '');
-          console.log(pct);
+          // console.log(pct);
 
           feature.setProperty('name', pct);
           // console.log(feature.getProperty('name'));
@@ -130,7 +120,7 @@
         var chairName = pctObject[0].Name;
         var chairEmail = pctObject[0].Email;
 
-        console.log(chairName) + "<br>";
+        // console.log(chairName) + "<br>";
 
         var contentString = '<b>Precinct ' + pctNumber + '</b>';
 

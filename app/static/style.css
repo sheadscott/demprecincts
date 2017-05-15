@@ -27,6 +27,16 @@ body {
   padding-bottom: 20px;
 }
 
+html.map-page, body.map-page {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#flashed {
+  text-align: center;
+}
+
 #flashed ul {
   list-style: none;
 }
@@ -35,6 +45,10 @@ body {
  * element that contains the map. */
 
 div#home-map.container-fluid { height: 500px; padding-left: 0; padding-right: 0; }
+
+iframe {
+  border: none;
+}
 
 #title-container {
   background-color: #00AEF3;
@@ -79,12 +93,8 @@ ul#position label {
 #map {
   height: 100%;
 }
-/* Optional: Makes the sample page fill the window. */
-/*html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}*/
+
+
 
 .gm-style .gm-style-iw, .gm-style .gm-style-iw p {
   font-size: 14px;

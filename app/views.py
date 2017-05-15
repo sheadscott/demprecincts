@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, request
 from app import app, db
 from datetime import datetime
 from .forms import ContactForm
-from .models import User, State
+from .models import User, State, County
 from .emails import send_contact_notification
 
 app.jinja_env.line_statement_prefix = '#'
@@ -28,7 +28,7 @@ def index():
         userEmail = User.query.filter_by(email=u.email).first()
         msg = contact.message.data
         send_contact_notification(u, msg)
-        flash('Thanks for your interest!<br>We will be in contact with you at:<br>{0}'.format(contact.email.data))
+        flash('Thanks for your interest!<br><br>We will be in contact with you at:<br>{0}'.format(contact.email.data))
 
         if userEmail != None:
             pass
@@ -53,11 +53,18 @@ def index():
 # Pass these in to map()
 
 
-@app.route('/map/')
 @app.route('/map/<state>/<county>/')
 def map(state=None, county=None):
-    sheet = 'https://docs.google.com/spreadsheets/d/156SJVhA1jHg8kxGjBQfGRsdO3qVFry-rkX1jHo3AAV4/pubhtml'
-    return render_template('map.html.j2', state=state, county=county, sheet=sheet)
+    state = state.upper()
+    county = county.title()
+    state_db = State.query.filter_by(postal_code=state).first()
+    county_db = state_db.counties.filter(County.name==county).first()
+    sheet = county_db.sheet_url
+    geojson = county_db.geojson_url
+    latitude = county_db.latitude
+    longitude = county_db.longitude
+
+    return render_template('map.html.j2', state=state, county=county, sheet=sheet, geojson=geojson, latitude=latitude, longitude=longitude)
 
 
 @app.errorhandler(404)
