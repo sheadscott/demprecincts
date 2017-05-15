@@ -74,11 +74,13 @@
 
         map.data.loadGeoJson('{{ geojson }}');
 
+        var activeColor = '#00AEF3';
+        var vacantColor = '#666666';
 
         map.data.setStyle({
-          fillColor: '#0332fb',
-          fillOpacity: 0.3,
-          strokeColor: '#0332fb',
+          fillColor: activeColor,
+          fillOpacity: 0.2,
+          strokeColor: activeColor,
           strokeWeight: 0.5
         });
 
@@ -90,12 +92,12 @@
           feature.setProperty('name', pct);
           // console.log(feature.getProperty('name'));
           // var pct = pctNumber;
-          var color = vacantPrecincts.indexOf(pct) > -1 ? '#333333' : '#0332fb';
+          var color = vacantPrecincts.indexOf(pct) > -1 ? vacantColor : activeColor;
           var opacity = noRegistered.indexOf(pct) > -1 ? 0 : 0.3;
           return {
             fillColor: color,
             fillOpacity: opacity,
-            strokeColor: '#0332fb',
+            strokeColor: activeColor,
             strokeWeight: 0.5,
             strokeOpacity: 0.6
           };
