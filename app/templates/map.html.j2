@@ -77,13 +77,6 @@
         var activeColor = '#00AEF3';
         var vacantColor = '#666666';
 
-        map.data.setStyle({
-          fillColor: activeColor,
-          fillOpacity: 0.1,
-          strokeColor: activeColor,
-          strokeWeight: 0.5
-        });
-
         map.data.setStyle(function(feature) {
 
           var pct = feature.getProperty('PREC').replace(/\b0+/g, '');
@@ -93,13 +86,13 @@
           // console.log(feature.getProperty('name'));
           // var pct = pctNumber;
           var color = vacantPrecincts.indexOf(pct) > -1 ? vacantColor : activeColor;
-          var opacity = noRegistered.indexOf(pct) > -1 ? 0 : 0.3;
+          var opacity = noRegistered.indexOf(pct) > -1 ? 0 : 0.2;
           return {
             fillColor: color,
             fillOpacity: opacity,
             strokeColor: activeColor,
-            strokeWeight: 0.5,
-            strokeOpacity: 0.6
+            strokeWeight: 0.8,
+            strokeOpacity: 0.8
           };
         });
 
