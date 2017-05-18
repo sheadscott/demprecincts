@@ -10,10 +10,12 @@
 
     <div id="map"></div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script src="https://unpkg.com/topojson@3"></script>
     <script>
 
       var spreadSheetURL = '{{ sheet }}';
       var pctChairs;
+      var topoData;
 
       function initSheet() {
 
@@ -29,6 +31,24 @@
 
       initSheet();
 
+      var request = new XMLHttpRequest();
+      // var filename = '/static/maps/tx/{{ county|lower() }}.json';
+      request.open('GET', '/static/maps/tx/{{ county|lower() }}.json' , true);
+
+      request.onload = function() {
+      	if (request.status >= 200 && request.status < 400) {
+      		// Success!
+      		topoData = JSON.parse(request.responseText);
+      	} else {
+      		// We reached our target server, but it returned an error
+      	}
+      };
+
+    	request.onerror = function() {
+    		  // There was a connection error of some sort
+    	};
+
+    	request.send();
 
       var map;
       var infoWindow;
@@ -72,7 +92,9 @@
 
         // console.log(noRegistered);
 
-        map.data.loadGeoJson('{{ geojson }}');
+        geoJsonObject = topojson.feature(topoData, topoData.objects.travis);
+        map.data.addGeoJson(geoJsonObject);
+        // map.data.loadGeoJson('{{ geojson }}');
 
         var activeColor = '#00AEF3';
         var vacantColor = '#666666';
