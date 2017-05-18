@@ -17,6 +17,7 @@
         if (request.status >= 200 && request.status < 400) {
           // Success!
           topoData = JSON.parse(request.responseText);
+          initSheet();
         } else {
           console.log('Error downloading {{ county|lower() }}.json');
         }
@@ -27,7 +28,14 @@
       };
 
       request.send();
-      
+
+      function loadMapScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap';
+        document.body.appendChild(script);
+      }
+
     </script>
 
     <div id="map"></div>
@@ -51,17 +59,8 @@
                          simpleSheet: true } )
       }
 
-      initSheet();
-
       var map;
       var infoWindow;
-
-      function loadMapScript() {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap';
-        document.body.appendChild(script);
-      }
 
       function initMap() {
 
@@ -169,7 +168,5 @@
       }
 
     </script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATRjXrmXQuVmYrbE9bbOHfyzhALGHH5G4&callback=initMap"
-    async defer></script> -->
   </body>
 </html>
