@@ -21,6 +21,13 @@
           console.log('Error downloading {{ county|lower() }}.json');
         }
       };
+
+      request.onerror = function() {
+          // There was a connection error of some sort
+      };
+
+      request.send();
+      
     </script>
 
     <div id="map"></div>
@@ -45,12 +52,6 @@
       }
 
       initSheet();
-
-    	request.onerror = function() {
-    		  // There was a connection error of some sort
-    	};
-
-    	request.send();
 
       var map;
       var infoWindow;
