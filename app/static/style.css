@@ -31,6 +31,7 @@ html.map-page, body.map-page {
   height: 100%;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 #flashed {
@@ -100,7 +101,7 @@ ul#position label {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	margin-left: 30px;
+	margin-left: 0px;
 	width: 100px;
 }
 
