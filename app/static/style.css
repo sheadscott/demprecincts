@@ -92,9 +92,17 @@ ul#position label {
 
 #map {
   height: 100%;
+	position: relative;
 }
 
-
+#map #spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin-left: 30px;
+	width: 100px;
+}
 
 .gm-style .gm-style-iw, .gm-style .gm-style-iw p {
   font-size: 14px;
