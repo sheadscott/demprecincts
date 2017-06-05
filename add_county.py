@@ -2,24 +2,30 @@
 
 from app import db, models
 
-name = 'Travis'
+name = 'Llano'
 state_code = 'TX'
-sheet_url = 'https://docs.google.com/spreadsheets/d/1CMW89Fl2yo0BQbc9gCF7BfhpNzgzMo_hmZ8oXGLRTyQ/pubhtml'
-geojson_url = 'https://cdn.rawgit.com/sheadscott/county-voting-precincts/a6a4aac8/tx/travis.geojson'
-latitude = 30.267
-longitude = 97.743
+sheet_url = 'https://docs.google.com/spreadsheets/d/16L2OwGGQ3c4GrnO-IaNqTW1r0N1RWcuvfyc0pzeocbc/pub?output=csv'
+latitude = 30.7593
+longitude = 98.6750
 
 state = models.State.query.filter_by(postal_code=state_code).first()
 s_id = state.id
 
 def add_county(s_id):
-    county = models.County(name=name, state=s_id, sheet_url=sheet_url, geojson_url=geojson_url, latitude=latitude, longitude=longitude)
+    county = models.County(name=name,
+                           state=s_id,
+                           sheet_url=sheet_url,
+                           latitude=latitude,
+                           longitude=longitude)
     db.session.add(county)
 
 def update_county(s_id, county):
     county = models.County.query.filter_by(name=county).first()
     county.sheet_url = sheet_url
+    # Add any columns that need to get updated here
 
-update_county(s_id, 'Travis')
+#  update_county(s_id, 'Travis')
+
+add_county(s_id)
 
 db.session.commit()
