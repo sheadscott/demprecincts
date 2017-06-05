@@ -56,7 +56,10 @@ def index():
 @app.route('/map/<state>/<county>/')
 def map(state=None, county=None):
     state = state.upper()
-    county = county.title()
+    if county == 'mclennan':
+        county = 'McLennan'
+    else:
+        county = county.title()
     state_db = State.query.filter_by(postal_code=state).first()
     county_db = state_db.counties.filter(County.name==county).first()
     sheet = county_db.sheet_url
