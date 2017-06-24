@@ -40,6 +40,7 @@ html.map-page, body.map-page {
 
 #flashed ul {
   list-style: none;
+  padding-left: 0;
 }
 
 /* GOOGLE MAPS - Always set the map height explicitly to define the size of the div
