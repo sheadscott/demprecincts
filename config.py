@@ -14,7 +14,7 @@ RECAPTCHA_PRIVATE_KEY = '6LeSmyAUAAAAACoOtSXNXkHLVFZoHQ9u8KtCOygG'
 # email server
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465
-MAIL_USE_TLS = False
+MAIL_USE_TLS = True
 MAIL_USE_SSL = True
 MAIL_USERNAME = 'demprecincts@gmail.com'
 MAIL_PASSWORD = '69N$B7tyK45VC$Q*jk346%j!'
