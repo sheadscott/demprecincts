@@ -107,13 +107,21 @@
         });
         var chairName = pctObject[0].Name;
         var chairEmail = pctObject[0].Email;
+        var chairPhone = pctObject[0].Phone;
 
         // console.log(chairName) + "<br>";
 
         var contentString = '<b>Precinct ' + pctNumber + '</b>';
 
+        // Add name, email and phone # if they exist to contentString
         if(chairName != "Vacant" && chairName != "No Registered Voters") {
-          contentString += "<br>" + chairName + "<br><a href='mailto:" + chairEmail + "'>" + chairEmail + "</a>";
+          contentString += "<br>" + chairName;
+          if(chairEmail != "" && chairEmail != undefined) {
+            contentString += "<br><a href='mailto:" + chairEmail + "'>" + chairEmail + "</a>";
+          }
+          if(chairPhone != "" && chairPhone != undefined) {
+            contentString += "<br><a href='tel:1-" + chairPhone + "'>" + chairPhone + "</a>";
+          }
         } else {
           if(chairName == "Vacant") {
             contentString += "<p>Do you know someone that would become the Precinct Chair of an unoccupied seat?<br>Here’s where they sign up: <a href='http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf'>http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf</a></p>";
