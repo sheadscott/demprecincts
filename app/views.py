@@ -70,6 +70,23 @@ def map(state=None, county=None):
     return render_template('map.html.j2', state=state, county=county, sheet=sheet, geojson=geojson, latitude=latitude, longitude=longitude)
 
 
+@app.route('/election/<state>/<county>/')
+def election(state=None, county=None):
+    state = state.upper()
+    if county == 'mclennan':
+        county = 'McLennan'
+    else:
+        county = county.title()
+    state_db = State.query.filter_by(postal_code=state).first()
+    county_db = state_db.counties.filter(County.name==county).first()
+    # sheet = county_db.sheet_url
+    sheet = 'https://docs.google.com/spreadsheets/d/1zeKExlxt5kd5YnJgJrLtGb6FpzgGzSXKPlk1oJqw41U/pub?output=csv' # Travis County Election Judges
+    geojson = county_db.geojson_url
+    latitude = county_db.latitude
+    longitude = county_db.longitude
+
+    return render_template('election-map.html.j2', state=state, county=county, sheet=sheet, geojson=geojson, latitude=latitude, longitude=longitude)
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html.j2'), 404
