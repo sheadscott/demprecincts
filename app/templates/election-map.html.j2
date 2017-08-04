@@ -41,7 +41,6 @@
         var vacantPrecincts = [];
         var vacantPrecinctObjs = judges.filter(function(obj){
           var re = /.*not\sassigned.*/i;
-	  console.log(obj);
 	  console.log(obj.Name);
 	  console.log(obj.Confirmed);
           return obj.Confirmed.match(re);
@@ -105,7 +104,7 @@
           contentString += "<br>" + judgeName;
         } else {
           if(judgeName == "NOT ASSIGNED") {
-            contentString += "<p>Do you know someone that would become the Precinct Chair of an unoccupied seat?<br>Here’s where they sign up: <a href='http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf'>http://www.sos.state.tx.us/elections/forms/pol-sub/2-1f.pdf</a></p>";
+		  contentString += "<p>Do you want the Republicans running your Democratic Party Primary election?</p><p>Of course not! Help us put a stop to that by signing up to be a Judge, Alternate Judge, or Clerk for the next Election! You'll even get paid for it.  Contact the Travis County Democratic Party Office: <a href='tel:1-512-477-7500'>(512) 477-7500</a> or <a href='info@TravisCountyDemocrats.org'>info@TravisCountyDemocrats.org</a></p>";
           }
         }
 
