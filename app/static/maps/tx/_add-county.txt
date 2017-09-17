@@ -1,6 +1,6 @@
 # Variables for the database fields
-NAME="Montgomery"
+NAME="Parker"
 STATE=45
-SHEET_URL="https://docs.google.com/spreadsheets/d/19IRzLiNXFBkvoxGN0PyPrYGlV1TzPfRyOB7IrVioZfI/pub?output=csv"
-LAT=30.3119 
-LONG=95.4561
+SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRSyU4Jy777qefawpDMWUdCVIczr2u75gGI2v1THldsCwjrnprCPlR1NkIwmRq3QtGPRwiV0en3B0Ic/pub?output=csv"
+LAT=32.7593
+LONG=97.7973
