@@ -91,6 +91,8 @@
 						color = diColor;
 					} else if ( ridc.indexOf(district) > -1 ) {
 						color = ridcColor;
+					} else {
+						color = "#666666";
 					}
 					// console.log(color);
           // var opacity = noRegistered.indexOf(district) > -1 ? 0 : 0.2;
@@ -119,13 +121,12 @@
         var districtObject = districts.filter(function(obj){
           return obj.District == districtNumber;
         });
-        // var chairName = districtObject[0].Name;
-        // var chairEmail = districtObject[0].Email;
-        // var chairPhone = districtObject[0].Phone;
+        var incumbent = districtObject[0].Incumbent;
+        var party = districtObject[0].Party;
 
         // console.log(chairName) + "<br>";
 
-        var contentString = '<b>HD ' + districtNumber + '</b>';
+        var contentString = '<b>HD ' + districtNumber + '</b><br/>' + incumbent + ' (' + party + ')' ;
 
         map.data.revertStyle();
         map.data.overrideStyle(event.feature, {strokeWeight: 2});
