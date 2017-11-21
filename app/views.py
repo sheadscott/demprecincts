@@ -69,6 +69,12 @@ def map(state=None, county=None):
 
     return render_template('map.html.j2', state=state, county=county, sheet=sheet, geojson=geojson, latitude=latitude, longitude=longitude)
 
+@app.route('/tx-house-2018/')
+def txhouse():
+    latitude = 31.9686
+    longitude = 99.9018
+
+    return render_template('tx-house-2018.html.j2', latitude=latitude, longitude=longitude)
 
 @app.route('/election/<state>/<county>/')
 def election(state=None, county=None):
