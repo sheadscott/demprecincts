@@ -108,6 +108,36 @@ ul#position label {
   line-height: 1.4em;
 }
 
+.gm-style-iw h3 {
+	margin-top: 0;
+}
+
+.gm-style-iw img {
+	float: left;
+	width: 75px;
+	height: 75px;
+}
+
+.gm-style-iw a, .gm-style-iw span {
+	padding-left: 10px;
+}
+
+.gm-style-iw div {
+	clear: both;
+	padding-top: 10px;
+}
+
+div#dc-title {
+	color: #000;
+	margin-bottom: 15px;
+	width: 250px;
+	font-weight: 600;
+	border-bottom: solid 1px #333;
+	border-top: solid 1px #333;
+	text-align: center;
+	padding: 10px 0;
+}
+
 .gm-style .gm-style-iw p {
   width: 300px;
 }

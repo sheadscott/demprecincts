@@ -126,7 +126,40 @@
 
         // console.log(chairName) + "<br>";
 
-        var contentString = '<b>HD ' + districtNumber + '</b><br/>' + incumbent + ' (' + party + ')' ;
+        var contentString = '<h3>HD ' + districtNumber + '</h3><h4>' + incumbent + ' (' + party + ')</h4>' ;
+
+				var dcNum = 1;
+				var dcContent = "";
+
+				while(dcNum < 6){
+					var dcName = districtObject[0]["DC" + dcNum + "_name"];
+
+					if(dcName) {
+						var dcURL = districtObject[0]["DC" + dcNum + "_url"];
+						var dcText;
+						if(dcURL) {
+							dcText = "<a href='" + dcURL + "'>" + dcName + "</a>";
+						} else {
+							dcText = "<span>" + dcName + "</span>";
+						}
+						var nameArray = dcName.split(' ');
+						nameArray = nameArray.reverse();
+						var imageURL = "/static/images/dem-challengers/" + nameArray[0].toLowerCase() + "_" + nameArray[1].toLowerCase() + ".jpg";
+						var dcDiv = "<div><img src='" + imageURL + "' onerror=\"this.onerror=null;this.src='/static/images/no-image.png';\">" + dcText + "</div>";
+						console.log(dcDiv);
+						dcContent += dcDiv;
+					} else {
+						break;
+					}
+					dcNum++;
+				}
+
+				if(dcNum == 2) {
+					contentString += "<div id='dc-title'>Democratic Challenger</div>" + dcContent;
+				} 
+				if(dcNum > 2) {
+					contentString += "<div id='dc-title'>Democratic Challengers</div>" + dcContent;
+				}
 
         map.data.revertStyle();
         map.data.overrideStyle(event.feature, {strokeWeight: 2});
