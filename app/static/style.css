@@ -158,6 +158,11 @@ ul#position label {
 	height: 75px;
 }
 
+img.house-rep {
+	height: 125px;
+	margin: 0 10px 10px 0;
+}
+
 .gm-style-iw a, .gm-style-iw span {
 	padding-left: 10px;
 }
@@ -165,6 +170,7 @@ ul#position label {
 .gm-style-iw div {
 	clear: both;
 	padding-top: 10px;
+	width: 250px;
 }
 
 div#dc-title {
@@ -179,7 +185,6 @@ div#dc-title {
 }
 
 .gm-style .gm-style-iw p {
-  width: 300px;
 }
 
 /* END GOOGLE MAPS */
