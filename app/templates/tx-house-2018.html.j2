@@ -61,7 +61,7 @@
 
         var di = [];
         var diObjs = districts.filter(function(obj){
-          var re = /.*di.*/i;
+          var re = /.*d[io].*/i;
           return obj.Status.match(re);
         });
 
