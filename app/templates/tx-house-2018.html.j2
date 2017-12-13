@@ -136,7 +136,7 @@
         var party = districtObject[0].Party;
 
         // console.log(chairName) + "<br>";
-				if( districtObject[0].Status == "RODC" ) {
+				if( districtObject[0].Status == "RODC" || districtObject[0].Status == "DO" ) {
 					var contentString = "<img src='/static/images/seat-open.jpg' alt='' class='house-rep' />";
 					contentString += '<h3>HD ' + districtNumber + '</h3><h4>Open Seat</h4>' ;
 				} else {
