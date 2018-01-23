@@ -173,6 +173,10 @@ img.house-rep {
 	width: 250px;
 }
 
+.gm-style-iw h4 a {
+	padding-left: 0;
+}
+
 div#dc-title {
 	color: #000;
 	margin-bottom: 15px;

@@ -134,6 +134,7 @@
         });
         var incumbent = districtObject[0].Incumbent;
         var party = districtObject[0].Party;
+				var demIncumbentURL = districtObject[0].DI_url;
 
         // console.log(chairName) + "<br>";
 				if( districtObject[0].Status == "RODC" || districtObject[0].Status == "DO" ) {
@@ -141,7 +142,11 @@
 					contentString += '<h3>HD ' + districtNumber + '</h3><h4>Open Seat</h4>' ;
 				} else {
 					var contentString = "<img src='/static/images/house-reps/" + districtNumber + ".jpg' alt='' class='house-rep' />";
-					contentString += '<h3>HD ' + districtNumber + '</h3><h4>' + incumbent + ' (' + party + ')</h4>' ;
+					if (demIncumbentURL) {
+						contentString += '<h3>HD ' + districtNumber + '</h3><h4><a href="' + demIncumbentURL + '">' + incumbent + ' (' + party + ')</a></h4>' ;
+					} else {
+						contentString += '<h3>HD ' + districtNumber + '</h3><h4>' + incumbent + ' (' + party + ')</h4>' ;
+					}
 				}
 
 
