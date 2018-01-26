@@ -97,11 +97,11 @@
 
         // console.log(judgeName) + "<br>";
 
-        var contentString = '<b>Precinct ' + pctNumber + '</b>';
+        var contentString = '<h3>Precinct ' + pctNumber + '</h3>';
 
         // Add name, email and phone # if they exist to contentString
         if(judgeName != "NOT ASSIGNED" && judgeName != "") {
-          contentString += "<br>" + judgeName;
+          contentString += judgeName;
         } else {
           if(judgeName == "NOT ASSIGNED") {
 		  contentString += "<p>Do you want the Republicans running your Democratic Party Primary election?</p><p>Of course not! Help us put a stop to that by signing up to be a Judge, Alternate Judge, or Clerk for the next Election! You'll even get paid for it.  Contact the Travis County Democratic Party Office: <a href='tel:1-512-477-7500'>(512) 477-7500</a> or <a href='info@TravisCountyDemocrats.org'>info@TravisCountyDemocrats.org</a></p>";

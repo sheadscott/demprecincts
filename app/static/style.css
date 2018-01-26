@@ -150,6 +150,7 @@ ul#position label {
 
 .gm-style-iw h3 {
 	margin-top: 0;
+	margin-bottom: 8px;
 }
 
 .gm-style-iw img {
@@ -163,13 +164,13 @@ img.house-rep {
 	margin: 0 10px 10px 0;
 }
 
-.gm-style-iw a, .gm-style-iw span {
+.gm-style-iw span {
 	padding-left: 10px;
 }
 
 .gm-style-iw div {
 	clear: both;
-	padding-top: 10px;
+	padding-top: 3px;
 	width: 250px;
 }
 

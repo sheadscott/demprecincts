@@ -111,11 +111,11 @@
 
         // console.log(chairName) + "<br>";
 
-        var contentString = '<b>Precinct ' + pctNumber + '</b>';
+        var contentString = '<h3>Precinct ' + pctNumber + '</h3>';
 
         // Add name, email and phone # if they exist to contentString
         if(chairName != "Vacant" && chairName != "No Registered Voters") {
-          contentString += "<br>" + chairName;
+          contentString += chairName;
           if(chairEmail != "" && chairEmail != undefined) {
             contentString += "<br><a href='mailto:" + chairEmail + "'>" + chairEmail + "</a>";
           }
