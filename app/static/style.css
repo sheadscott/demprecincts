@@ -189,7 +189,8 @@ div#dc-title {
 	padding: 10px 0;
 }
 
-.gm-style .gm-style-iw p {
+.dc-link {
+	padding-left: 10px;
 }
 
 /* END GOOGLE MAPS */
