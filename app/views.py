@@ -76,6 +76,13 @@ def txhouse():
 
     return render_template('tx-house-2018.html.j2', latitude=latitude, longitude=longitude)
 
+@app.route('/tx-senate-2018/')
+def txsenate():
+    latitude = 31.9686
+    longitude = 99.9018
+
+    return render_template('tx-senate-2018.html.j2', latitude=latitude, longitude=longitude)
+
 @app.route('/election/<state>/<county>/')
 def election(state=None, county=None):
     state = state.upper()
