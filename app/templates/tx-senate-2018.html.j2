@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class='map-page'>
   <head>
-    <title>Democrats Running for the Texas House of Representatives 2018</title>
+    <title>Democrats Running for the Texas Senate 2018</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -16,6 +16,9 @@
 			</li>
 			<li> 			
 				<div class="key di"></div> Dem Incumbent
+			</li>
+			<li> 			
+				<div class="key netc"></div> Election in 2020
 			</li>
 		</ul>
 	  <script src="https://use.fontawesome.com/2d04c7b284.js"></script>
@@ -144,13 +147,13 @@ console.log(ridc);
         // console.log(chairName) + "<br>";
 				if( districtObject[0].Status == "RODC" || districtObject[0].Status == "DO" ) {
 					var contentString = "<img src='/static/images/seat-open.jpg' alt='' class='house-rep' />";
-					contentString += '<h3>HD ' + districtNumber + '</h3><h4>Open Seat</h4>' ;
+					contentString += '<h3>SD ' + districtNumber + '</h3><h4>Open Seat</h4>' ;
 				} else {
 					var contentString = "<img src='/static/images/senate/current-reps/" + districtNumber + ".jpg' alt='' class='house-rep' />";
 					if (demIncumbentURL) {
-						contentString += '<h3>HD ' + districtNumber + '</h3><h4><a href="' + demIncumbentURL + '">' + incumbent + ' (' + party + ')</a></h4>' ;
+						contentString += '<h3>SD ' + districtNumber + '</h3><h4><a href="' + demIncumbentURL + '">' + incumbent + ' (' + party + ')</a></h4>' ;
 					} else {
-						contentString += '<h3>HD ' + districtNumber + '</h3><h4>' + incumbent + ' (' + party + ')</h4>' ;
+						contentString += '<h3>SD ' + districtNumber + '</h3><h4>' + incumbent + ' (' + party + ')</h4>' ;
 					}
 				}
 
