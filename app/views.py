@@ -76,6 +76,13 @@ def txhouse():
 
     return render_template('tx-house-2018.html.j2', latitude=latitude, longitude=longitude)
 
+@app.route('/tx-house-2020/')
+def txhouse2020():
+    latitude = 31.9686
+    longitude = 99.9018
+
+    return render_template('tx-house-2020.html.j2', latitude=latitude, longitude=longitude)
+
 @app.route('/tx-senate-2018/')
 def txsenate():
     latitude = 31.9686
